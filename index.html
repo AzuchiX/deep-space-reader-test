@@ -39,17 +39,17 @@
       <div class="empty" id="uploadPanel"><div class="emoji">✦</div><h2>把一本书放进宇宙</h2><div class="subtitle">支持 EPUB · 文件仅存于当前设备的浏览器中<br>不需要注册账号，也不会上传小说到服务器</div><label class="upload" for="bookFile">＋ 选择 EPUB 文件<input id="bookFile" type="file" accept=".epub,application/epub+zip" /></label></div>
       <div class="tip"><b>存储诊断：</b><span id="storageStatus">检查中…</span><br><button id="checkStorage" class="smallButton" type="button">点击检测保存功能</button><br><b>关于阅读进度</b><br>阅读器会自动保存书籍和阅读位置。请使用 Safari 的普通浏览模式，不要清除网站数据。为防止意外丢失，可在书架里导出进度备份。第一次打开网页需要联网加载阅读引擎。</div>
     </div>
-    <div class="footer">深空书房 v1.2 测试版 · 为个人合法持有的 EPUB 文件设计</div>
+    <div class="footer">深空书房 v1.3 RC1 · 正式发布前测试 · 为个人合法持有的 EPUB 文件设计</div>
   </section>
   <section id="reader" class="reader hidden" data-theme="sepia">
     <div class="readingHeader"><button id="backButton" class="iconBtn" aria-label="返回书架">‹</button><div class="readingTitle" id="readingTitle">正在阅读</div><button id="menuButton" class="iconBtn" aria-label="打开目录和设置">☰</button></div>
-    <div class="readerFrame" id="gestureSurface"><div id="pageTrack"><div class="pageSlot"><div id="viewerPrev" class="pageView"></div></div><div class="pageSlot"><div id="viewer" class="pageView"></div></div><div class="pageSlot"><div id="viewerNext" class="pageView"></div></div></div><div id="touchShield" aria-label="滑动翻页触摸区域"></div><div id="touchDebug">手势检测：等待触摸</div><div id="loading" class="loading hidden">✦<span>正在打开书籍…</span></div></div>
+    <div class="readerFrame" id="gestureSurface"><div id="pageTrack"><div class="pageSlot"><div id="viewerPrev" class="pageView"></div></div><div class="pageSlot"><div id="viewer" class="pageView"></div></div><div class="pageSlot"><div id="viewerNext" class="pageView"></div></div></div><div id="touchShield" aria-label="滑动翻页触摸区域"></div><div id="touchDebug" class="hidden" aria-live="off">手势检测：等待触摸</div><div id="loading" class="loading hidden">✦<span>正在打开书籍…</span></div></div>
     <div class="readingFooter"><button id="prevButton" class="readerNav" aria-label="上一页">‹</button><div id="readProgress" class="readProgress">阅读进度自动保存</div><button id="nextButton" class="readerNav" aria-label="下一页">›</button></div>
     <div id="shade" class="drawerShade hidden"></div>
     <aside id="drawer" class="drawer hidden" aria-label="阅读设置与目录"><div class="drawerHead"><b>阅读控制</b><button id="closeDrawer" class="iconBtn">✕</button></div><div class="drawerBody">
       <h2>排版</h2><div class="settingsRow"><span>字号</span><div class="pillGroup"><button class="pill" id="fontSmaller">A−</button><button class="pill" id="fontLarger">A＋</button></div></div>
       <div class="settingsRow"><span>主题</span><div class="pillGroup"><button class="pill" data-theme-choice="sepia">护眼</button><button class="pill" data-theme-choice="white">白色</button><button class="pill" data-theme-choice="dark">深色</button></div></div>
-      <h2 style="margin-top:26px">阅读器更新</h2><div class="settingsRow"><span id="versionInfo">当前版本 V1.2.4 空白页修复测试版</span><button class="pill" id="checkUpdates">检查更新</button></div><p id="updateStatus" class="small">测试版不会自动覆盖正式版。</p><h2 style="margin-top:26px">章节目录</h2><div id="toc">正在读取目录…</div>
+      <h2 style="margin-top:26px">高级设置</h2><div class="settingsRow"><span>手势诊断浮条（默认隐藏）</span><button class="pill" id="gestureDebugToggle" aria-pressed="false">开启调试</button></div><h2 style="margin-top:26px">阅读器更新</h2><div class="settingsRow"><span id="versionInfo">当前版本 V1.3 RC1 正式候选版</span><button class="pill" id="checkUpdates">检查更新</button></div><p id="updateStatus" class="small">候选版：请先测试、备份进度；不会自动替换正式版。</p><h2 style="margin-top:26px">章节目录</h2><div id="toc">正在读取目录…</div>
     </div></aside>
   </section>
 </main>
@@ -66,8 +66,10 @@ let savedTimer=null, toastTimer=null, locationsReady=false;
 let neighborPrev=null, neighborNext=null, gestureBusy=false, neighborsReady=false;
 let neighborStatus={prev:false,next:false}, previewCfi=null, activeDragWidth=0;
 let neighborGeneration=0, gesture=null, dragFrame=0, dragPending=0, lastDebugAt=0;
-function debugTouch(message){const el=$('touchDebug'); if(el) el.textContent='V1.2.4 · '+message;}
-const readerVersion='1.2.4-beta';
+let showGestureDebug=localStorage.getItem('reader-gesture-debug')==='1';
+function updateGestureDebug(){const el=$('touchDebug');if(el)el.classList.toggle('hidden',!showGestureDebug);const toggle=$('gestureDebugToggle');if(toggle){toggle.textContent=showGestureDebug?'关闭调试':'开启调试';toggle.setAttribute('aria-pressed',String(showGestureDebug));}}
+function debugTouch(message){if(!showGestureDebug)return;const el=$('touchDebug');if(el)el.textContent='V1.3 RC1 · '+message;}
+const readerVersion='1.3.0-rc1';
 
 function toast(message){$('toast').textContent=message;$('toast').classList.remove('hidden');clearTimeout(toastTimer);toastTimer=setTimeout(()=>$('toast').classList.add('hidden'),3400)}
 function makeId(){return crypto.randomUUID?crypto.randomUUID():String(Date.now())+'-'+Math.random().toString(36).slice(2)}
@@ -172,7 +174,7 @@ async function checkForUpdates(){
   if(!resp.ok)throw Error('服务器未提供版本信息');
   const data=await resp.json();
   if(!/^\d+\.\d+\.\d+/.test(data.version||''))throw Error('版本信息格式错误');
-  const installed=readerVersion.replace(/-.*/,''), remote=data.version.replace(/-.*/,'');
+  const installed=readerVersion.split('-')[0], remote=data.version.split('-')[0];
   const newer=(a,b)=>{let x=a.split('.').map(Number),y=b.split('.').map(Number);for(let i=0;i<3;i++){if(x[i]!==y[i])return x[i]>y[i]}return false};
   if(newer(remote,installed)){
    el.textContent=`发现新版本 ${data.version}。请先备份阅读进度，再刷新应用。`;
@@ -299,6 +301,8 @@ function onTouchCancel(){gesture=null;stopDragFrame();setTrackOffset(0,true)}
 bindGestureTarget($('touchShield'));
 window.addEventListener('resize',()=>{if(!gesture&&!gestureBusy){setTrackOffset(0,false);scheduleNeighbors()}},{passive:true});
 $('checkUpdates').onclick=checkForUpdates;
+$('gestureDebugToggle').onclick=()=>{showGestureDebug=!showGestureDebug;localStorage.setItem('reader-gesture-debug',showGestureDebug?'1':'0');updateGestureDebug();};
+updateGestureDebug();
 
 $('checkStorage').onclick=checkStorage;
 $('bookFile').addEventListener('change',e=>importFile(e.target.files?.[0]));$('helpButton').onclick=showHelp;

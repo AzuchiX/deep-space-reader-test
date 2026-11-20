@@ -1,1 +1,5 @@
-{"version": "1.2.4", "notes": "补齐遗漏的预览/动画函数，修复初始化时 ReferenceError 导致的空白正文和翻页失效；不修改 EPUB 数据库"}
+{
+  "version": "1.3.0",
+  "channel": "release-candidate",
+  "notes": "保留 V1.2.4 经实机验证的跟手翻页；隐藏调试提示并提供高级开关；不迁移书籍数据库；暂不包含动态页码。"
+}
