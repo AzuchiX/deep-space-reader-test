@@ -1,1 +1,1 @@
-{"version": "1.2.3", "notes": "跟手位移改用 requestAnimationFrame；邻页分别校验后才显示；拖动时冻结预览、降低布局和诊断开销"}
+{"version": "1.2.4", "notes": "补齐遗漏的预览/动画函数，修复初始化时 ReferenceError 导致的空白正文和翻页失效；不修改 EPUB 数据库"}

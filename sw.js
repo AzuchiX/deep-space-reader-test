@@ -1,4 +1,4 @@
-const CACHE='deep-space-reader-v1.2.3-test';
+const CACHE='deep-space-reader-v1.2.4-test';
 const SHELL=['./','./index.html','./icon.svg','./manifest.webmanifest','./version.json'];
 self.addEventListener('install',e=>e.waitUntil(caches.open(CACHE).then(c=>c.addAll(SHELL)).then(()=>self.skipWaiting())));
 self.addEventListener('activate',e=>e.waitUntil(Promise.all([self.clients.claim(),caches.keys().then(keys=>Promise.all(keys.filter(k=>k.startsWith('deep-space-reader-')&&k!==CACHE).map(k=>caches.delete(k))))])));

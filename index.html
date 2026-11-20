@@ -49,7 +49,7 @@
     <aside id="drawer" class="drawer hidden" aria-label="阅读设置与目录"><div class="drawerHead"><b>阅读控制</b><button id="closeDrawer" class="iconBtn">✕</button></div><div class="drawerBody">
       <h2>排版</h2><div class="settingsRow"><span>字号</span><div class="pillGroup"><button class="pill" id="fontSmaller">A−</button><button class="pill" id="fontLarger">A＋</button></div></div>
       <div class="settingsRow"><span>主题</span><div class="pillGroup"><button class="pill" data-theme-choice="sepia">护眼</button><button class="pill" data-theme-choice="white">白色</button><button class="pill" data-theme-choice="dark">深色</button></div></div>
-      <h2 style="margin-top:26px">阅读器更新</h2><div class="settingsRow"><span id="versionInfo">当前版本 V1.2.2 修复测试版</span><button class="pill" id="checkUpdates">检查更新</button></div><p id="updateStatus" class="small">测试版不会自动覆盖正式版。</p><h2 style="margin-top:26px">章节目录</h2><div id="toc">正在读取目录…</div>
+      <h2 style="margin-top:26px">阅读器更新</h2><div class="settingsRow"><span id="versionInfo">当前版本 V1.2.4 空白页修复测试版</span><button class="pill" id="checkUpdates">检查更新</button></div><p id="updateStatus" class="small">测试版不会自动覆盖正式版。</p><h2 style="margin-top:26px">章节目录</h2><div id="toc">正在读取目录…</div>
     </div></aside>
   </section>
 </main>
@@ -66,8 +66,8 @@ let savedTimer=null, toastTimer=null, locationsReady=false;
 let neighborPrev=null, neighborNext=null, gestureBusy=false, neighborsReady=false;
 let neighborStatus={prev:false,next:false}, previewCfi=null, activeDragWidth=0;
 let neighborGeneration=0, gesture=null, dragFrame=0, dragPending=0, lastDebugAt=0;
-function debugTouch(message){const el=$('touchDebug'); if(el) el.textContent='V1.2.3 · '+message;}
-const readerVersion='1.2.3-beta';
+function debugTouch(message){const el=$('touchDebug'); if(el) el.textContent='V1.2.4 · '+message;}
+const readerVersion='1.2.4-beta';
 
 function toast(message){$('toast').textContent=message;$('toast').classList.remove('hidden');clearTimeout(toastTimer);toastTimer=setTimeout(()=>$('toast').classList.add('hidden'),3400)}
 function makeId(){return crypto.randomUUID?crypto.randomUUID():String(Date.now())+'-'+Math.random().toString(36).slice(2)}
@@ -193,6 +193,32 @@ function setTrackOffset(dx,animate=false){
 function setupPageTrack(){neighborsReady=false;neighborGeneration++;gesture=null;gestureBusy=false;setPreviewState('prev',false);setPreviewState('next',false);stopDragFrame();setTrackOffset(0,false)}
 function destroyRenditions(){neighborGeneration++;clearTimeout(neighborTimer);gesture=null;neighborsReady=false;gestureBusy=false;stopDragFrame();setPreviewState('prev',false);setPreviewState('next',false);for(const r of [rendition,neighborPrev,neighborNext]){try{r?.destroy()}catch(e){console.warn(e)}}rendition=null;neighborPrev=null;neighborNext=null;setTrackOffset(0,false)}
 let neighborTimer=null;
+// V1.2.4: required preview and animation helpers (missing in V1.2.3 bundle).
+function setPreviewState(direction, ready) {
+  neighborStatus[direction] = Boolean(ready);
+  const el = $(direction === 'prev' ? 'viewerPrev' : 'viewerNext');
+  if (el) el.dataset.ready = ready ? 'yes' : 'no';
+}
+function availablePreview(dx) {
+  return dx < 0 ? neighborStatus.next : neighborStatus.prev;
+}
+function validatePreview(r) {
+  try {
+    const loc = r.currentLocation();
+    const contents = r.getContents() || [];
+    return Boolean(loc?.start?.cfi && contents.some(c =>
+      (c.document?.body?.innerText || c.document?.body?.textContent || '').trim().length > 0
+    ));
+  } catch (e) { console.warn('Preview validation failed', e); return false; }
+}
+function stopDragFrame() {
+  if (dragFrame) { cancelAnimationFrame(dragFrame); dragFrame = 0; }
+}
+function paintDrag() { dragFrame = 0; setTrackOffset(dragPending, false); }
+function queueDrag(dx) {
+  dragPending = dx;
+  if (!dragFrame) dragFrame = requestAnimationFrame(paintDrag);
+}
 function scheduleNeighbors(){
  if(!rendition||!neighborPrev||!neighborNext||gestureBusy||gesture)return;
  neighborsReady=false;setPreviewState('prev',false);setPreviewState('next',false);
