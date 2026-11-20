@@ -21,6 +21,10 @@
 #pageTrack.settling{transition:transform .2s cubic-bezier(.2,.75,.2,1)}
 #pageTrack iframe{touch-action:pan-y}
 #gestureSurface{user-select:none;-webkit-user-select:none}
+/* Transparent hit surface: intercept touch in the host document, not inside EPUB iframe. */
+#touchShield{position:absolute;inset:4px 9px;z-index:3;background:transparent;touch-action:none;-webkit-user-select:none;user-select:none}
+#touchDebug{position:absolute;z-index:6;right:14px;top:12px;background:#28354bde;color:#ebf0ff;border:1px solid #576885;border-radius:10px;padding:6px 8px;font-size:11px;pointer-events:none;max-width:76%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
 </style>
 <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/epubjs@0.3.93/dist/epub.min.js" defer onerror="window.epubFailed=true"></script>
@@ -39,13 +43,13 @@
   </section>
   <section id="reader" class="reader hidden" data-theme="sepia">
     <div class="readingHeader"><button id="backButton" class="iconBtn" aria-label="返回书架">‹</button><div class="readingTitle" id="readingTitle">正在阅读</div><button id="menuButton" class="iconBtn" aria-label="打开目录和设置">☰</button></div>
-    <div class="readerFrame" id="gestureSurface"><div id="pageTrack"><div class="pageSlot"><div id="viewerPrev" class="pageView"></div></div><div class="pageSlot"><div id="viewer" class="pageView"></div></div><div class="pageSlot"><div id="viewerNext" class="pageView"></div></div></div><div id="loading" class="loading hidden">✦<span>正在打开书籍…</span></div></div>
+    <div class="readerFrame" id="gestureSurface"><div id="pageTrack"><div class="pageSlot"><div id="viewerPrev" class="pageView"></div></div><div class="pageSlot"><div id="viewer" class="pageView"></div></div><div class="pageSlot"><div id="viewerNext" class="pageView"></div></div></div><div id="touchShield" aria-label="滑动翻页触摸区域"></div><div id="touchDebug">手势检测：等待触摸</div><div id="loading" class="loading hidden">✦<span>正在打开书籍…</span></div></div>
     <div class="readingFooter"><button id="prevButton" class="readerNav" aria-label="上一页">‹</button><div id="readProgress" class="readProgress">阅读进度自动保存</div><button id="nextButton" class="readerNav" aria-label="下一页">›</button></div>
     <div id="shade" class="drawerShade hidden"></div>
     <aside id="drawer" class="drawer hidden" aria-label="阅读设置与目录"><div class="drawerHead"><b>阅读控制</b><button id="closeDrawer" class="iconBtn">✕</button></div><div class="drawerBody">
       <h2>排版</h2><div class="settingsRow"><span>字号</span><div class="pillGroup"><button class="pill" id="fontSmaller">A−</button><button class="pill" id="fontLarger">A＋</button></div></div>
       <div class="settingsRow"><span>主题</span><div class="pillGroup"><button class="pill" data-theme-choice="sepia">护眼</button><button class="pill" data-theme-choice="white">白色</button><button class="pill" data-theme-choice="dark">深色</button></div></div>
-      <h2 style="margin-top:26px">阅读器更新</h2><div class="settingsRow"><span id="versionInfo">当前版本 V1.2.1 修复测试版</span><button class="pill" id="checkUpdates">检查更新</button></div><p id="updateStatus" class="small">测试版不会自动覆盖正式版。</p><h2 style="margin-top:26px">章节目录</h2><div id="toc">正在读取目录…</div>
+      <h2 style="margin-top:26px">阅读器更新</h2><div class="settingsRow"><span id="versionInfo">当前版本 V1.2.2 修复测试版</span><button class="pill" id="checkUpdates">检查更新</button></div><p id="updateStatus" class="small">测试版不会自动覆盖正式版。</p><h2 style="margin-top:26px">章节目录</h2><div id="toc">正在读取目录…</div>
     </div></aside>
   </section>
 </main>
@@ -61,7 +65,8 @@ let savedTimer=null, toastTimer=null, locationsReady=false;
 // Isolated preview renditions show the previous and next pages during a held swipe.
 let neighborPrev=null, neighborNext=null, gestureBusy=false, neighborsReady=false;
 let neighborGeneration=0, gesture=null, lastMoveAt=0;
-const readerVersion='1.2.1-beta';
+function debugTouch(message){const el=$('touchDebug'); if(el) el.textContent='手势检测：'+message;}
+const readerVersion='1.2.2-beta';
 
 function toast(message){$('toast').textContent=message;$('toast').classList.remove('hidden');clearTimeout(toastTimer);toastTimer=setTimeout(()=>$('toast').classList.add('hidden'),3400)}
 function makeId(){return crypto.randomUUID?crypto.randomUUID():String(Date.now())+'-'+Math.random().toString(36).slice(2)}
@@ -201,8 +206,8 @@ async function refreshNeighbors(){
   if(gen!==neighborGeneration||!neighborPrev||!neighborNext)return;
   await Promise.all([neighborPrev.prev(),neighborNext.next()]);
   if(gen!==neighborGeneration||gestureBusy)return;
-  neighborsReady=true;
- }catch(e){console.warn('邻页预加载失败',e);neighborsReady=false}
+  neighborsReady=true;debugTouch('邻页就绪，可跟手拖动');
+ }catch(e){console.warn('邻页预加载失败',e);neighborsReady=false;debugTouch('邻页加载失败，可松手翻页')}
 }
 function bindGestureDocument(view){
  const doc=view?.contents?.document || view?.document || view?.iframe?.contentDocument;
@@ -217,8 +222,8 @@ function bindGestureTarget(node){
  node.addEventListener('touchcancel',onTouchCancel,{passive:true});
 }
 function onTouchStart(e){
- if(!rendition||gestureBusy||!$('drawer').classList.contains('hidden')||e.touches.length!==1)return;
- const p=e.touches[0];gesture={x:p.clientX,y:p.clientY,dx:0,started:performance.now(),horizontal:false,blocked:false};
+ if(!rendition||gestureBusy||!$('drawer').classList.contains('hidden')||e.touches.length!==1){debugTouch('当前不可操作');return;}
+ const p=e.touches[0];gesture={x:p.clientX,y:p.clientY,dx:0,started:performance.now(),horizontal:false,blocked:false};debugTouch('已检测到按下');
 }
 function onTouchMove(e){
  if(!gesture||gesture.blocked||gestureBusy||e.touches.length!==1)return;
@@ -233,6 +238,7 @@ function onTouchMove(e){
  if(e.cancelable)e.preventDefault();
  gesture.dx=Math.max(-trackWidth(),Math.min(trackWidth(),dx));
  gesture.hasPreview=neighborsReady;
+ debugTouch('拖动 '+Math.round(gesture.dx)+'px · '+(neighborsReady?'邻页已就绪':'邻页未就绪'));
  if(neighborsReady)setTrackOffset(gesture.dx,false);
 }
 async function onTouchEnd(){
@@ -241,6 +247,7 @@ async function onTouchEnd(){
  const velocity=Math.abs(g.dx)/Math.max(1,performance.now()-g.started);
  const shouldMove=Math.abs(g.dx)>trackWidth()*.32||(Math.abs(g.dx)>35&&velocity>.55);
  const direction=shouldMove?(g.dx<0?'next':'prev'):null;
+ debugTouch(direction?('松手：'+(direction==='next'?'下一页':'上一页')):'松手：回弹');
  gestureBusy=true;
  setTrackOffset(g.hasPreview&&direction?(direction==='next'?-trackWidth():trackWidth()):0,true);
  await new Promise(resolve=>setTimeout(resolve,215));
@@ -249,7 +256,7 @@ async function onTouchEnd(){
 }
 function onTouchCancel(){gesture=null;setTrackOffset(0,true)}
 // Outer layer also receives touches outside the iframe.
-bindGestureTarget($('gestureSurface'));
+bindGestureTarget($('touchShield'));
 $('checkUpdates').onclick=checkForUpdates;
 
 $('checkStorage').onclick=checkStorage;
