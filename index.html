@@ -14,11 +14,11 @@
 :root{--bg:#090e1a;--panel:#121b2c;--panel2:#19243a;--line:#2a3850;--text:#f1f2f8;--muted:#9ca9be;--accent:#a6baff;--accent2:#788ee4;--paper:#f8f2e6;--ink:#303138;--reading-size:19px;--reading-line:1.85}*{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Noto Sans SC",sans-serif;background:var(--bg);color:var(--text)}body:before{content:"";position:fixed;inset:0;pointer-events:none;background:radial-gradient(ellipse at 15% -15%,#263a6b66,transparent 52%),radial-gradient(ellipse at 110% 30%,#362b6155,transparent 54%);z-index:0}.app{position:relative;min-height:100dvh;max-width:760px;margin:auto}.hidden{display:none!important}button{font:inherit;cursor:pointer}button:disabled{opacity:.45;cursor:not-allowed}.top{padding:max(env(safe-area-inset-top),24px) 22px 14px;display:flex;justify-content:space-between;align-items:center}.brand{font-size:11px;letter-spacing:.28em;font-weight:700;color:#afbef2}.small{font-size:12px;color:var(--muted)}.iconBtn{border:1px solid var(--line);background:#18213799;color:var(--text);border-radius:12px;min-width:42px;min-height:42px;padding:8px 12px}.hero{padding:38px 24px 22px}.eyebrow{font-size:12px;letter-spacing:.22em;color:var(--accent)}h1{font-size:37px;letter-spacing:.08em;margin:12px 0 8px;font-weight:650}h2{font-size:19px;font-weight:600;margin:0 0 13px}.subtitle{color:var(--muted);line-height:1.7;font-size:14px}.orb{width:130px;height:130px;position:absolute;right:7%;top:82px;border-radius:50%;background:radial-gradient(circle at 35% 27%,#9badd7 0%,#4b5c88 25%,#283958 48%,#111c32 73%);box-shadow:0 0 75px #4e78ca42,inset -24px -15px 27px #080e1d;opacity:.55;pointer-events:none}.content{padding:12px 22px 42px}.bookcard{background:linear-gradient(145deg,#1c2a45,#101a2c);border:1px solid #384766;border-radius:20px;padding:19px;display:flex;gap:17px;align-items:center;margin-bottom:15px;box-shadow:0 9px 28px #00000026}.cover{width:82px;min-width:82px;height:120px;border-radius:5px 12px 12px 5px;background:linear-gradient(160deg,#354972,#111a2e 60%,#0b1021);box-shadow:inset 5px 0 8px #fff1,5px 8px 16px #0005;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:10px;border-left:3px solid #7185b3}.coverSymbol{font-size:33px;color:#b7c9ff}.coverTxt{font-size:10px;color:#aebde0;letter-spacing:.2em}.info{flex:1;min-width:0}.booktitle{font-size:16px;font-weight:650;line-height:1.6;overflow-wrap:anywhere}.bookauthor{font-size:12px;color:var(--muted);margin:3px 0 12px}.progressTrack{height:4px;background:#344156;border-radius:8px;overflow:hidden;margin-bottom:9px}.progressFill{height:100%;width:0;background:linear-gradient(90deg,#8298e6,#c0cbfb);transition:width .25s}.bookActions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.primary,.secondary{border-radius:12px;padding:10px 13px;border:0;font-size:13px;font-weight:600}.primary{background:#a8bcff;color:#14213b}.secondary{background:#26334b;color:#dbe4ff;border:1px solid #40516d}.empty{border:1px dashed #556584;background:#131c2e88;border-radius:20px;padding:28px 20px;text-align:center;margin:16px 0 22px}.empty .emoji{font-size:42px}.empty h2{margin:12px 0 5px}.upload{display:inline-flex;align-items:center;justify-content:center;gap:9px;background:#a8bcff;color:#17223b;padding:14px 21px;border-radius:12px;font-weight:700;margin-top:15px;cursor:pointer}.upload input{display:none}.tip{background:#121c2e;border:1px solid #2b3b57;border-radius:14px;padding:16px;line-height:1.8;color:#b7c3d9;font-size:13px}.footer{padding:15px 22px 35px;font-size:11px;color:#7f8da5}.reader{height:100dvh;display:flex;flex-direction:column;position:relative;background:var(--paper);color:var(--ink)}.reader[data-theme="dark"]{--paper:#151b25;--ink:#e4e7eb}.reader[data-theme="white"]{--paper:#fff;--ink:#292d36}.readingHeader{flex:0 0 auto;display:flex;align-items:center;justify-content:space-between;gap:8px;padding:calc(env(safe-area-inset-top) + 7px) 14px 8px;border-bottom:1px solid color-mix(in srgb,var(--ink) 12%,transparent);background:var(--paper)}.readingTitle{flex:1;text-align:center;font-size:12px;color:var(--ink);opacity:.72;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.reader .iconBtn{color:var(--ink);background:transparent;border:1px solid color-mix(in srgb,var(--ink) 18%,transparent);min-width:39px;min-height:38px}.readerFrame{flex:1;min-height:0;padding:4px 9px;position:relative}.readerFrame #viewer{height:100%;width:100%}.readingFooter{flex:0 0 auto;display:flex;align-items:center;gap:9px;padding:8px 14px calc(env(safe-area-inset-bottom) + 9px);background:var(--paper);border-top:1px solid color-mix(in srgb,var(--ink) 10%,transparent)}.readerNav{border:0;background:transparent;color:var(--ink);padding:9px 13px;font-size:20px}.readProgress{flex:1;text-align:center;font-size:11px;opacity:.7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.drawerShade{position:absolute;inset:0;background:#0008;z-index:20}.drawer{position:absolute;right:0;top:0;bottom:0;width:min(84%,350px);z-index:21;background:#121b2c;color:#f3f5ff;display:flex;flex-direction:column;box-shadow:-14px 0 36px #0007}.drawerHead{display:flex;justify-content:space-between;align-items:center;padding:calc(env(safe-area-inset-top) + 18px) 16px 16px;border-bottom:1px solid #34435d}.drawerBody{overflow:auto;padding:13px}.tocItem{display:block;width:100%;padding:12px 10px;border:0;border-bottom:1px solid #26344b;background:none;text-align:left;color:#dce5fa;font-size:13px;line-height:1.55}.settingsRow{display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid #273650;gap:12px}.pillGroup{display:flex;gap:5px;flex-wrap:wrap}.pill{border:1px solid #465876;background:#233149;color:white;padding:7px 10px;border-radius:9px}.status{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom) + 65px);transform:translateX(-50%);background:#273a58;color:#fff;padding:10px 15px;border-radius:11px;font-size:12px;z-index:99;max-width:88%;box-shadow:0 8px 25px #0006}.loading{position:absolute;inset:50px 10px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px;background:var(--paper);z-index:4;color:var(--ink);font-size:13px}.smallButton{border:0;background:transparent;color:#c8d6fc;padding:9px 3px;text-decoration:underline;font-size:12px}.visuallyHidden{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}@media(min-width:700px){.hero{padding-top:80px}.orb{top:110px;right:12%}.reader{max-width:760px;margin:0 auto}}
 
 .readerFrame{overflow:hidden;touch-action:pan-y}
-#pageTrack{position:absolute;inset:4px 9px;display:flex;width:calc(300% - 54px);transform:translate3d(calc(-100% / 3),0,0);will-change:transform}
+#pageTrack{position:absolute;inset:4px 9px;display:flex;width:calc(300% - 54px);transform:translate3d(calc(-100% / 3),0,0);will-change:transform;backface-visibility:hidden;contain:layout paint}
 .pageSlot{height:100%;width:33.333333%;flex:none;overflow:hidden;position:relative;background:var(--paper)}
-.pageView{width:100%;height:100%;overflow:hidden}
+.pageView{width:100%;height:100%;overflow:hidden;position:relative}.pageSlot iframe{display:block;max-width:100%}
 #pageTrack.dragging{transition:none!important}
-#pageTrack.settling{transition:transform .2s cubic-bezier(.2,.75,.2,1)}
+#pageTrack.settling{transition:transform .24s cubic-bezier(.22,.75,.24,1)}
 #pageTrack iframe{touch-action:pan-y}
 #gestureSurface{user-select:none;-webkit-user-select:none}
 /* Transparent hit surface: intercept touch in the host document, not inside EPUB iframe. */
@@ -64,9 +64,10 @@ let theme=localStorage.getItem('reader-theme')||'sepia';
 let savedTimer=null, toastTimer=null, locationsReady=false;
 // Isolated preview renditions show the previous and next pages during a held swipe.
 let neighborPrev=null, neighborNext=null, gestureBusy=false, neighborsReady=false;
-let neighborGeneration=0, gesture=null, lastMoveAt=0;
-function debugTouch(message){const el=$('touchDebug'); if(el) el.textContent='手势检测：'+message;}
-const readerVersion='1.2.2-beta';
+let neighborStatus={prev:false,next:false}, previewCfi=null, activeDragWidth=0;
+let neighborGeneration=0, gesture=null, dragFrame=0, dragPending=0, lastDebugAt=0;
+function debugTouch(message){const el=$('touchDebug'); if(el) el.textContent='V1.2.3 · '+message;}
+const readerVersion='1.2.3-beta';
 
 function toast(message){$('toast').textContent=message;$('toast').classList.remove('hidden');clearTimeout(toastTimer);toastTimer=setTimeout(()=>$('toast').classList.add('hidden'),3400)}
 function makeId(){return crypto.randomUUID?crypto.randomUUID():String(Date.now())+'-'+Math.random().toString(36).slice(2)}
@@ -144,10 +145,10 @@ async function openBook(id){
       const p=locationsReady?book.locations.percentageFromCfi(cfi):null;
       if(Number.isFinite(p)){$('readProgress').textContent=`已阅读 ${Math.round(p*100)}%`;currentRecord.percent=Math.max(0,Math.min(100,p*100))}
       else {$('readProgress').textContent=position?.start?.displayed?`本章 ${position.start.displayed.page} / ${position.start.displayed.total} 页`:'阅读进度已保存'}
-      clearTimeout(savedTimer);savedTimer=setTimeout(savePosition,380);scheduleNeighbors()
+      clearTimeout(savedTimer);savedTimer=setTimeout(savePosition,380);if(!gestureBusy&&!gesture)scheduleNeighbors()
     });
     rendition.on('selected',(_,contents)=>{try{contents.window.getSelection().removeAllRanges()}catch{}});
-    applyTheme();await rendition.display(currentRecord.cfi||undefined);$('loading').classList.add('hidden');scheduleNeighbors();
+    applyTheme();await rendition.display(currentRecord.cfi||undefined);$('loading').classList.add('hidden');setTrackOffset(0,false);scheduleNeighbors();
     buildToc();
     // Generating locations does not block initial reading. If it fails, CFI resume still works.
     const activeBook=book;book.locations.generate(1300).then(()=>{if(book!==activeBook)return;locationsReady=true;if(currentCfi){const p=activeBook.locations.percentageFromCfi(currentCfi);if(Number.isFinite(p)){$('readProgress').textContent=`已阅读 ${Math.round(p*100)}%`;currentRecord.percent=Math.max(0,Math.min(100,p*100));savePosition()}}}).catch(err=>console.warn('Locations unavailable',err));
@@ -158,7 +159,7 @@ async function closeReader(){hideDrawer();clearTimeout(savedTimer);await savePos
 async function buildToc(){const root=$('toc');root.replaceChildren();try{const navigation=await book.loaded.navigation;const items=navigation.toc||[];function add(items,depth){for(const item of items){const btn=document.createElement('button');btn.className='tocItem';btn.style.paddingLeft=(10+Math.min(depth,4)*15)+'px';btn.textContent=item.label||'未命名章节';btn.onclick=async()=>{hideDrawer();try{await rendition.display(item.href)}catch(e){toast('无法跳转到这一章节')}};root.append(btn);if(item.subitems?.length)add(item.subitems,depth+1)}}add(items,0);if(!items.length)root.textContent='这本书未提供导航目录'}catch(e){root.textContent='无法读取目录'}}
 function showDrawer(){ $('shade').classList.remove('hidden');$('drawer').classList.remove('hidden') }
 function hideDrawer(){ $('shade').classList.add('hidden');$('drawer').classList.add('hidden') }
-function changeSize(delta){fontSize=Math.max(14,Math.min(30,fontSize+delta));localStorage.setItem('reader-font-size',String(fontSize));if(rendition){rendition.themes.fontSize(fontSize+'px');for(const r of [neighborPrev,neighborNext])r?.themes.fontSize(fontSize+'px');neighborsReady=false;scheduleNeighbors()}toast('字号 '+fontSize+'px')}
+function changeSize(delta){fontSize=Math.max(14,Math.min(30,fontSize+delta));localStorage.setItem('reader-font-size',String(fontSize));if(rendition){rendition.themes.fontSize(fontSize+'px');for(const r of [neighborPrev,neighborNext])r?.themes.fontSize(fontSize+'px');neighborsReady=false;setPreviewState('prev',false);setPreviewState('next',false);scheduleNeighbors()}toast('字号 '+fontSize+'px')}
 async function exportProgress(){const all=await getAllBooks();const data={format:'deepspace-progress',version:1,date:new Date().toISOString(),books:all.map(({filename,title,author,cfi,percent})=>({filename,title,author,cfi,percent}))};const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='深空书房-阅读进度.json';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)}
 async function importProgress(file){try{const data=JSON.parse(await file.text());if(data.format!=='deepspace-progress'||!Array.isArray(data.books))throw Error('不是本阅读器的进度备份');const all=await getAllBooks();let restored=0;for(const old of data.books){const rec=all.find(r=>r.filename===old.filename&&r.title===old.title);if(rec&&typeof old.cfi==='string'){rec.cfi=old.cfi;rec.percent=Number(old.percent)||0;rec.savedAt=Date.now();await storeBook(rec);restored++}}await renderLibrary();toast(`已恢复 ${restored} 本书的进度（需先导入对应 EPUB）`)}catch(e){toast('读取进度备份失败：'+e.message)}}
 function showHelp(){const content='使用说明：\n\n1. 点击「选择 EPUB 文件」，从 iPhone 的「文件」中选书。\n2. 左右下角翻页，上方菜单调整字体、主题或选择章节。\n3. 进度自动保存在此设备的 Safari 网站数据中，下次打开此网页即可继续。\n4. Safari 清除网站数据、无痕浏览、卸载主屏幕网页可能造成进度丢失。\n5. 本页面不上传电子书，也不会云端同步。\n\n是否导出当前书架的阅读进度备份？';if(confirm(content))exportProgress()}
@@ -183,37 +184,46 @@ async function checkForUpdates(){
  }catch(e){el.textContent='检查失败：'+(e?.message||e)+'，请检查网络'}
 }
 function track(){return $('pageTrack')}
-function trackWidth(){return $('gestureSurface').clientWidth-18}
+function trackWidth(){return Math.max(1,$('gestureSurface').clientWidth-18)}
 function setTrackOffset(dx,animate=false){
- const t=track();t.classList.toggle('settling',animate);t.classList.toggle('dragging',!animate);
- t.style.transform=`translate3d(calc(-33.333333% + ${dx}px),0,0)`;
+ const t=track(); const width=(gesture||gestureBusy)&&activeDragWidth?activeDragWidth:trackWidth();
+ t.classList.toggle('settling',animate);t.classList.toggle('dragging',!animate);
+ t.style.transform=`translate3d(${Math.round(-width+dx)}px,0,0)`;
 }
-function setupPageTrack(){neighborsReady=false;neighborGeneration++;gesture=null;gestureBusy=false;setTrackOffset(0,false)}
-function destroyRenditions(){neighborGeneration++;gesture=null;neighborsReady=false;gestureBusy=false;for(const r of [rendition,neighborPrev,neighborNext]){try{r?.destroy()}catch(e){console.warn(e)}}rendition=null;neighborPrev=null;neighborNext=null;setTrackOffset(0,false)}
+function setupPageTrack(){neighborsReady=false;neighborGeneration++;gesture=null;gestureBusy=false;setPreviewState('prev',false);setPreviewState('next',false);stopDragFrame();setTrackOffset(0,false)}
+function destroyRenditions(){neighborGeneration++;clearTimeout(neighborTimer);gesture=null;neighborsReady=false;gestureBusy=false;stopDragFrame();setPreviewState('prev',false);setPreviewState('next',false);for(const r of [rendition,neighborPrev,neighborNext]){try{r?.destroy()}catch(e){console.warn(e)}}rendition=null;neighborPrev=null;neighborNext=null;setTrackOffset(0,false)}
 let neighborTimer=null;
 function scheduleNeighbors(){
- if(!rendition||!neighborPrev||!neighborNext||gestureBusy)return;
- neighborsReady=false;clearTimeout(neighborTimer);neighborTimer=setTimeout(refreshNeighbors,140);
+ if(!rendition||!neighborPrev||!neighborNext||gestureBusy||gesture)return;
+ neighborsReady=false;setPreviewState('prev',false);setPreviewState('next',false);
+ clearTimeout(neighborTimer);neighborTimer=setTimeout(refreshNeighbors,220);
 }
 async function refreshNeighbors(){
- if(!rendition||!neighborPrev||!neighborNext||gestureBusy)return;
- const cfi=rendition.currentLocation()?.start?.cfi;
- if(!cfi)return;
- const gen=++neighborGeneration;
- try{
-  // A separate rendition is moved by one REAL laid-out page; it is not a chapter preview.
-  await Promise.all([neighborPrev.display(cfi),neighborNext.display(cfi)]);
-  if(gen!==neighborGeneration||!neighborPrev||!neighborNext)return;
-  await Promise.all([neighborPrev.prev(),neighborNext.next()]);
-  if(gen!==neighborGeneration||gestureBusy)return;
-  neighborsReady=true;debugTouch('邻页就绪，可跟手拖动');
- }catch(e){console.warn('邻页预加载失败',e);neighborsReady=false;debugTouch('邻页加载失败，可松手翻页')}
+ if(!rendition||!neighborPrev||!neighborNext||gestureBusy||gesture)return;
+ const cfi=rendition.currentLocation()?.start?.cfi;if(!cfi)return;
+ const gen=++neighborGeneration;previewCfi=cfi;
+ // Each side is validated separately. Only show a neighboring page once EPUB.js
+ // has completed its own layout and the actual text is present.
+ const fill=async(direction,r,move)=>{
+  try{
+   await r.display(cfi);if(gen!==neighborGeneration||gestureBusy||gesture)return;
+   await r[move]();if(gen!==neighborGeneration||gestureBusy||gesture)return;
+   await new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)));
+   if(gen!==neighborGeneration||gestureBusy||gesture)return;
+   const ready=validatePreview(r);
+   setPreviewState(direction,ready);
+   if(!ready)console.warn(direction+' preview not laid out');
+  }catch(e){console.warn(direction+' preview failed',e);if(gen===neighborGeneration)setPreviewState(direction,false)}
+ };
+ await Promise.all([fill('prev',neighborPrev,'prev'),fill('next',neighborNext,'next')]);
+ if(gen!==neighborGeneration||gestureBusy||gesture)return;
+ neighborsReady=neighborStatus.prev&&neighborStatus.next;
+ debugTouch(`邻页预览：左${neighborStatus.prev?'✓':'…'} · 右${neighborStatus.next?'✓':'…'}`);
 }
 function bindGestureDocument(view){
  const doc=view?.contents?.document || view?.document || view?.iframe?.contentDocument;
  if(!doc||doc.__deepSpaceSwipe)return;
- doc.__deepSpaceSwipe=true;
- bindGestureTarget(doc);
+ doc.__deepSpaceSwipe=true;bindGestureTarget(doc);
 }
 function bindGestureTarget(node){
  node.addEventListener('touchstart',onTouchStart,{passive:true});
@@ -222,41 +232,46 @@ function bindGestureTarget(node){
  node.addEventListener('touchcancel',onTouchCancel,{passive:true});
 }
 function onTouchStart(e){
- if(!rendition||gestureBusy||!$('drawer').classList.contains('hidden')||e.touches.length!==1){debugTouch('当前不可操作');return;}
- const p=e.touches[0];gesture={x:p.clientX,y:p.clientY,dx:0,started:performance.now(),horizontal:false,blocked:false};debugTouch('已检测到按下');
+ if(!rendition||gestureBusy||!$('drawer').classList.contains('hidden')||e.touches.length!==1)return;
+ stopDragFrame();const p=e.touches[0];
+ gesture={x:p.clientX,y:p.clientY,dx:0,started:performance.now(),horizontal:false,blocked:false,previewDirection:null,previewAllowed:false};
+ activeDragWidth=trackWidth();debugTouch('已检测到触摸');
 }
 function onTouchMove(e){
  if(!gesture||gesture.blocked||gestureBusy||e.touches.length!==1)return;
- const p=e.touches[0];let dx=p.clientX-gesture.x,dy=p.clientY-gesture.y;
+ const p=e.touches[0],dx=p.clientX-gesture.x,dy=p.clientY-gesture.y;
  if(!gesture.horizontal){
-  if(Math.abs(dy)>10&&Math.abs(dy)>Math.abs(dx)*1.25){gesture.blocked=true;return}
-  if(Math.abs(dx)<8)return;
-  if(Math.abs(dx)>Math.abs(dy)*1.15)gesture.horizontal=true;else return;
+  if(Math.abs(dy)>12&&Math.abs(dy)>Math.abs(dx)*1.3){gesture.blocked=true;return}
+  if(Math.abs(dx)<6||Math.abs(dx)<=Math.abs(dy)*1.2)return;
+  gesture.horizontal=true;
  }
- // Do not discard the gesture when asynchronous preview rendering is late.
- // Without previews, fall back to a reliable swipe-to-turn on release.
  if(e.cancelable)e.preventDefault();
- gesture.dx=Math.max(-trackWidth(),Math.min(trackWidth(),dx));
- gesture.hasPreview=neighborsReady;
- debugTouch('拖动 '+Math.round(gesture.dx)+'px · '+(neighborsReady?'邻页已就绪':'邻页未就绪'));
- if(neighborsReady)setTrackOffset(gesture.dx,false);
+ const g=gesture;g.dx=Math.max(-activeDragWidth,Math.min(activeDragWidth,dx));
+ const direction=g.dx<0?'next':'prev';
+ // Lock the preview direction when dragging begins; do not swap preview mid-drag.
+ // Reversing all the way through zero resets the lock so both directions still work.
+ if(g.previewDirection!==direction){g.previewDirection=direction;g.previewAllowed=availablePreview(g.dx)}
+ if(g.previewAllowed){queueDrag(g.dx)}else{stopDragFrame();setTrackOffset(0,false)}
+ const now=performance.now();if(now-lastDebugAt>160){lastDebugAt=now;debugTouch(`拖动 ${Math.round(g.dx)}px · ${g.previewAllowed?'实时双页':'预览准备中，松手可翻页'}`)}
 }
 async function onTouchEnd(){
- if(!gesture)return;const g=gesture;gesture=null;
+ if(!gesture)return;const g=gesture;gesture=null;stopDragFrame();
  if(!g.horizontal||g.blocked||gestureBusy){setTrackOffset(0,true);return}
  const velocity=Math.abs(g.dx)/Math.max(1,performance.now()-g.started);
- const shouldMove=Math.abs(g.dx)>trackWidth()*.32||(Math.abs(g.dx)>35&&velocity>.55);
+ const shouldMove=Math.abs(g.dx)>activeDragWidth*.34||(Math.abs(g.dx)>44&&velocity>.65);
  const direction=shouldMove?(g.dx<0?'next':'prev'):null;
- debugTouch(direction?('松手：'+(direction==='next'?'下一页':'上一页')):'松手：回弹');
+ const actuallyPreviewing=Boolean(g.previewAllowed);
+ debugTouch(direction?`松手：${direction==='next'?'下一页':'上一页'}`:'松手：回弹');
  gestureBusy=true;
- setTrackOffset(g.hasPreview&&direction?(direction==='next'?-trackWidth():trackWidth()):0,true);
- await new Promise(resolve=>setTimeout(resolve,215));
+ const target=direction&&actuallyPreviewing?(direction==='next'?-activeDragWidth:activeDragWidth):0;
+ setTrackOffset(target,true);
+ await new Promise(resolve=>setTimeout(resolve,250));
  if(direction&&rendition){try{await rendition[direction]()}catch(e){toast('翻页失败，请使用底部按钮')}}
  setTrackOffset(0,false);gestureBusy=false;scheduleNeighbors();
 }
-function onTouchCancel(){gesture=null;setTrackOffset(0,true)}
-// Outer layer also receives touches outside the iframe.
+function onTouchCancel(){gesture=null;stopDragFrame();setTrackOffset(0,true)}
 bindGestureTarget($('touchShield'));
+window.addEventListener('resize',()=>{if(!gesture&&!gestureBusy){setTrackOffset(0,false);scheduleNeighbors()}},{passive:true});
 $('checkUpdates').onclick=checkForUpdates;
 
 $('checkStorage').onclick=checkStorage;

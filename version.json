@@ -1,1 +1,1 @@
-{"version": "1.2.2", "notes": "透明手势捕获层与实时诊断提示；不依赖 EPUB iframe 事件"}
+{"version": "1.2.3", "notes": "跟手位移改用 requestAnimationFrame；邻页分别校验后才显示；拖动时冻结预览、降低布局和诊断开销"}
