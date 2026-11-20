@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#0b1120" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="深空书房" />
+<link rel="manifest" href="./manifest.webmanifest" />
+<link rel="icon" type="image/svg+xml" href="./icon.svg" />
+<title>深空书房 · 私人 EPUB 阅读器</title>
+<style>
+:root{--bg:#090e1a;--panel:#121b2c;--panel2:#19243a;--line:#2a3850;--text:#f1f2f8;--muted:#9ca9be;--accent:#a6baff;--accent2:#788ee4;--paper:#f8f2e6;--ink:#303138;--reading-size:19px;--reading-line:1.85}*{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Noto Sans SC",sans-serif;background:var(--bg);color:var(--text)}body:before{content:"";position:fixed;inset:0;pointer-events:none;background:radial-gradient(ellipse at 15% -15%,#263a6b66,transparent 52%),radial-gradient(ellipse at 110% 30%,#362b6155,transparent 54%);z-index:0}.app{position:relative;min-height:100dvh;max-width:760px;margin:auto}.hidden{display:none!important}button{font:inherit;cursor:pointer}button:disabled{opacity:.45;cursor:not-allowed}.top{padding:max(env(safe-area-inset-top),24px) 22px 14px;display:flex;justify-content:space-between;align-items:center}.brand{font-size:11px;letter-spacing:.28em;font-weight:700;color:#afbef2}.small{font-size:12px;color:var(--muted)}.iconBtn{border:1px solid var(--line);background:#18213799;color:var(--text);border-radius:12px;min-width:42px;min-height:42px;padding:8px 12px}.hero{padding:38px 24px 22px}.eyebrow{font-size:12px;letter-spacing:.22em;color:var(--accent)}h1{font-size:37px;letter-spacing:.08em;margin:12px 0 8px;font-weight:650}h2{font-size:19px;font-weight:600;margin:0 0 13px}.subtitle{color:var(--muted);line-height:1.7;font-size:14px}.orb{width:130px;height:130px;position:absolute;right:7%;top:82px;border-radius:50%;background:radial-gradient(circle at 35% 27%,#9badd7 0%,#4b5c88 25%,#283958 48%,#111c32 73%);box-shadow:0 0 75px #4e78ca42,inset -24px -15px 27px #080e1d;opacity:.55;pointer-events:none}.content{padding:12px 22px 42px}.bookcard{background:linear-gradient(145deg,#1c2a45,#101a2c);border:1px solid #384766;border-radius:20px;padding:19px;display:flex;gap:17px;align-items:center;margin-bottom:15px;box-shadow:0 9px 28px #00000026}.cover{width:82px;min-width:82px;height:120px;border-radius:5px 12px 12px 5px;background:linear-gradient(160deg,#354972,#111a2e 60%,#0b1021);box-shadow:inset 5px 0 8px #fff1,5px 8px 16px #0005;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:10px;border-left:3px solid #7185b3}.coverSymbol{font-size:33px;color:#b7c9ff}.coverTxt{font-size:10px;color:#aebde0;letter-spacing:.2em}.info{flex:1;min-width:0}.booktitle{font-size:16px;font-weight:650;line-height:1.6;overflow-wrap:anywhere}.bookauthor{font-size:12px;color:var(--muted);margin:3px 0 12px}.progressTrack{height:4px;background:#344156;border-radius:8px;overflow:hidden;margin-bottom:9px}.progressFill{height:100%;width:0;background:linear-gradient(90deg,#8298e6,#c0cbfb);transition:width .25s}.bookActions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.primary,.secondary{border-radius:12px;padding:10px 13px;border:0;font-size:13px;font-weight:600}.primary{background:#a8bcff;color:#14213b}.secondary{background:#26334b;color:#dbe4ff;border:1px solid #40516d}.empty{border:1px dashed #556584;background:#131c2e88;border-radius:20px;padding:28px 20px;text-align:center;margin:16px 0 22px}.empty .emoji{font-size:42px}.empty h2{margin:12px 0 5px}.upload{display:inline-flex;align-items:center;justify-content:center;gap:9px;background:#a8bcff;color:#17223b;padding:14px 21px;border-radius:12px;font-weight:700;margin-top:15px;cursor:pointer}.upload input{display:none}.tip{background:#121c2e;border:1px solid #2b3b57;border-radius:14px;padding:16px;line-height:1.8;color:#b7c3d9;font-size:13px}.footer{padding:15px 22px 35px;font-size:11px;color:#7f8da5}.reader{height:100dvh;display:flex;flex-direction:column;position:relative;background:var(--paper);color:var(--ink)}.reader[data-theme="dark"]{--paper:#151b25;--ink:#e4e7eb}.reader[data-theme="white"]{--paper:#fff;--ink:#292d36}.readingHeader{flex:0 0 auto;display:flex;align-items:center;justify-content:space-between;gap:8px;padding:calc(env(safe-area-inset-top) + 7px) 14px 8px;border-bottom:1px solid color-mix(in srgb,var(--ink) 12%,transparent);background:var(--paper)}.readingTitle{flex:1;text-align:center;font-size:12px;color:var(--ink);opacity:.72;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.reader .iconBtn{color:var(--ink);background:transparent;border:1px solid color-mix(in srgb,var(--ink) 18%,transparent);min-width:39px;min-height:38px}.readerFrame{flex:1;min-height:0;padding:4px 9px;position:relative}.readerFrame #viewer{height:100%;width:100%}.readingFooter{flex:0 0 auto;display:flex;align-items:center;gap:9px;padding:8px 14px calc(env(safe-area-inset-bottom) + 9px);background:var(--paper);border-top:1px solid color-mix(in srgb,var(--ink) 10%,transparent)}.readerNav{border:0;background:transparent;color:var(--ink);padding:9px 13px;font-size:20px}.readProgress{flex:1;text-align:center;font-size:11px;opacity:.7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.drawerShade{position:absolute;inset:0;background:#0008;z-index:20}.drawer{position:absolute;right:0;top:0;bottom:0;width:min(84%,350px);z-index:21;background:#121b2c;color:#f3f5ff;display:flex;flex-direction:column;box-shadow:-14px 0 36px #0007}.drawerHead{display:flex;justify-content:space-between;align-items:center;padding:calc(env(safe-area-inset-top) + 18px) 16px 16px;border-bottom:1px solid #34435d}.drawerBody{overflow:auto;padding:13px}.tocItem{display:block;width:100%;padding:12px 10px;border:0;border-bottom:1px solid #26344b;background:none;text-align:left;color:#dce5fa;font-size:13px;line-height:1.55}.settingsRow{display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid #273650;gap:12px}.pillGroup{display:flex;gap:5px;flex-wrap:wrap}.pill{border:1px solid #465876;background:#233149;color:white;padding:7px 10px;border-radius:9px}.status{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom) + 65px);transform:translateX(-50%);background:#273a58;color:#fff;padding:10px 15px;border-radius:11px;font-size:12px;z-index:99;max-width:88%;box-shadow:0 8px 25px #0006}.loading{position:absolute;inset:50px 10px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px;background:var(--paper);z-index:4;color:var(--ink);font-size:13px}.smallButton{border:0;background:transparent;color:#c8d6fc;padding:9px 3px;text-decoration:underline;font-size:12px}.visuallyHidden{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}@media(min-width:700px){.hero{padding-top:80px}.orb{top:110px;right:12%}.reader{max-width:760px;margin:0 auto}}
+
+.readerFrame{overflow:hidden;touch-action:pan-y}
+#pageTrack{position:absolute;inset:4px 9px;display:flex;width:calc(300% - 54px);transform:translate3d(calc(-100% / 3),0,0);will-change:transform}
+.pageSlot{height:100%;width:33.333333%;flex:none;overflow:hidden;position:relative;background:var(--paper)}
+.pageView{width:100%;height:100%;overflow:hidden}
+#pageTrack.dragging{transition:none!important}
+#pageTrack.settling{transition:transform .2s cubic-bezier(.2,.75,.2,1)}
+#pageTrack iframe{touch-action:pan-y}
+#gestureSurface{user-select:none;-webkit-user-select:none}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/epubjs@0.3.93/dist/epub.min.js" defer onerror="window.epubFailed=true"></script>
+</head>
+<body>
+<main class="app">
+  <section id="library">
+    <header class="top"><div class="brand">DEEP SPACE LIBRARY</div><button id="helpButton" class="iconBtn" aria-label="使用说明">?</button></header>
+    <div class="orb"></div>
+    <div class="hero"><div class="eyebrow">私人电子阅读空间</div><h1>深空书房</h1><div class="subtitle">让故事在宇宙中继续。<br>导入一次，下次接着上次的位置阅读。</div></div>
+    <div class="content"><h2>我的书架 <span class="small" id="bookCount"></span></h2><div id="books"></div>
+      <div class="empty" id="uploadPanel"><div class="emoji">✦</div><h2>把一本书放进宇宙</h2><div class="subtitle">支持 EPUB · 文件仅存于当前设备的浏览器中<br>不需要注册账号，也不会上传小说到服务器</div><label class="upload" for="bookFile">＋ 选择 EPUB 文件<input id="bookFile" type="file" accept=".epub,application/epub+zip" /></label></div>
+      <div class="tip"><b>存储诊断：</b><span id="storageStatus">检查中…</span><br><button id="checkStorage" class="smallButton" type="button">点击检测保存功能</button><br><b>关于阅读进度</b><br>阅读器会自动保存书籍和阅读位置。请使用 Safari 的普通浏览模式，不要清除网站数据。为防止意外丢失，可在书架里导出进度备份。第一次打开网页需要联网加载阅读引擎。</div>
+    </div>
+    <div class="footer">深空书房 v1.2 测试版 · 为个人合法持有的 EPUB 文件设计</div>
+  </section>
+  <section id="reader" class="reader hidden" data-theme="sepia">
+    <div class="readingHeader"><button id="backButton" class="iconBtn" aria-label="返回书架">‹</button><div class="readingTitle" id="readingTitle">正在阅读</div><button id="menuButton" class="iconBtn" aria-label="打开目录和设置">☰</button></div>
+    <div class="readerFrame" id="gestureSurface"><div id="pageTrack"><div class="pageSlot"><div id="viewerPrev" class="pageView"></div></div><div class="pageSlot"><div id="viewer" class="pageView"></div></div><div class="pageSlot"><div id="viewerNext" class="pageView"></div></div></div><div id="loading" class="loading hidden">✦<span>正在打开书籍…</span></div></div>
+    <div class="readingFooter"><button id="prevButton" class="readerNav" aria-label="上一页">‹</button><div id="readProgress" class="readProgress">阅读进度自动保存</div><button id="nextButton" class="readerNav" aria-label="下一页">›</button></div>
+    <div id="shade" class="drawerShade hidden"></div>
+    <aside id="drawer" class="drawer hidden" aria-label="阅读设置与目录"><div class="drawerHead"><b>阅读控制</b><button id="closeDrawer" class="iconBtn">✕</button></div><div class="drawerBody">
+      <h2>排版</h2><div class="settingsRow"><span>字号</span><div class="pillGroup"><button class="pill" id="fontSmaller">A−</button><button class="pill" id="fontLarger">A＋</button></div></div>
+      <div class="settingsRow"><span>主题</span><div class="pillGroup"><button class="pill" data-theme-choice="sepia">护眼</button><button class="pill" data-theme-choice="white">白色</button><button class="pill" data-theme-choice="dark">深色</button></div></div>
+      <h2 style="margin-top:26px">阅读器更新</h2><div class="settingsRow"><span id="versionInfo">当前版本 V1.2 测试版</span><button class="pill" id="checkUpdates">检查更新</button></div><p id="updateStatus" class="small">测试版不会自动覆盖正式版。</p><h2 style="margin-top:26px">章节目录</h2><div id="toc">正在读取目录…</div>
+    </div></aside>
+  </section>
+</main>
+<div id="toast" class="status hidden" role="status"></div>
+<script>
+'use strict';
+const DB_NAME='deepspace-epub-reader', STORE='books';
+const $=(id)=>document.getElementById(id);
+let db=null, book=null, rendition=null, currentId=null, currentRecord=null, currentCfi=null;
+let fontSize=Math.min(30,Math.max(14,Number(localStorage.getItem('reader-font-size'))||19));
+let theme=localStorage.getItem('reader-theme')||'sepia';
+let savedTimer=null, toastTimer=null, locationsReady=false;
+// Isolated preview renditions show the previous and next pages during a held swipe.
+let neighborPrev=null, neighborNext=null, gestureBusy=false, neighborsReady=false;
+let neighborGeneration=0, gesture=null, lastMoveAt=0;
+const readerVersion='1.2.0-beta';
+
+function toast(message){$('toast').textContent=message;$('toast').classList.remove('hidden');clearTimeout(toastTimer);toastTimer=setTimeout(()=>$('toast').classList.add('hidden'),3400)}
+function makeId(){return crypto.randomUUID?crypto.randomUUID():String(Date.now())+'-'+Math.random().toString(36).slice(2)}
+function requestToPromise(req){return new Promise((res,rej)=>{req.onsuccess=()=>res(req.result);req.onerror=()=>rej(req.error)})}
+function initDb(){return new Promise((res,rej)=>{const req=indexedDB.open(DB_NAME,1);req.onupgradeneeded=()=>{const store=req.result.createObjectStore(STORE,{keyPath:'id'});store.createIndex('savedAt','savedAt')};req.onsuccess=()=>{db=req.result;res(db)};req.onerror=()=>rej(req.error)})}
+function storeBook(record){return new Promise((resolve,reject)=>{const tx=db.transaction(STORE,'readwrite');tx.objectStore(STORE).put(record);tx.oncomplete=()=>resolve();tx.onerror=()=>reject(tx.error||new Error('数据库写入失败'));tx.onabort=()=>reject(tx.error||new Error('数据库写入被中断'))})}
+function getBook(id){return requestToPromise(db.transaction(STORE,'readonly').objectStore(STORE).get(id))}
+function getAllBooks(){return requestToPromise(db.transaction(STORE,'readonly').objectStore(STORE).getAll())}
+function deleteBook(id){return requestToPromise(db.transaction(STORE,'readwrite').objectStore(STORE).delete(id))}
+function fmtDate(s){try{return new Date(s).toLocaleDateString('zh-CN',{month:'short',day:'numeric'})}catch{return ''}}
+function safeText(value){return String(value??'').replace(/\s+/g,' ').trim()}
+async function renderLibrary(){
+  let all=await getAllBooks();all.sort((a,b)=>(b.savedAt||0)-(a.savedAt||0));$('books').replaceChildren();$('bookCount').textContent=`(${all.length})`;
+  $('uploadPanel').querySelector('h2').textContent=all.length?'继续添加 EPUB':'把一本书放进宇宙';
+  for(const rec of all){
+    let card=document.createElement('article');card.className='bookcard';
+    let cover=document.createElement('div');cover.className='cover';cover.innerHTML='<span class="coverSymbol">✦</span><span class="coverTxt">EPUB</span>';
+    let info=document.createElement('div');info.className='info';
+    let title=document.createElement('div');title.className='booktitle';title.textContent=rec.title||rec.filename;
+    let author=document.createElement('div');author.className='bookauthor';author.textContent=rec.author||'未知作者';
+    let progressTrack=document.createElement('div');progressTrack.className='progressTrack';let bar=document.createElement('div');bar.className='progressFill';bar.style.width=(rec.percent||0)+'%';progressTrack.append(bar);
+    let progress=document.createElement('div');progress.className='small';progress.textContent=(rec.cfi?`已阅读约 ${Math.round(rec.percent||0)}% · `:'尚未开始 · ')+`保存于 ${fmtDate(rec.savedAt)}`;
+    let actions=document.createElement('div');actions.className='bookActions';
+    let read=document.createElement('button');read.className='primary';read.textContent=rec.cfi?'继续阅读':'开始阅读';read.onclick=()=>openBook(rec.id);
+    let remove=document.createElement('button');remove.className='secondary';remove.textContent='删除';remove.onclick=async()=>{if(confirm('从此设备的阅读器中删除这本书和它的进度？')){await deleteBook(rec.id);renderLibrary();toast('已从书架移除')}};
+    actions.append(read,remove);info.append(title,author,progressTrack,progress,actions);card.append(cover,info);$('books').append(card);
+  }
+}
+async function checkStorage(){
+  const el=$('storageStatus');try{
+    if(!db)throw Error('数据库尚未准备好');
+    const id='__storage_test__', marker=String(Date.now());
+    await storeBook({id,filename:'test',title:marker,savedAt:Date.now()});
+    const result=await getBook(id);await deleteBook(id);
+    if(result?.title!==marker)throw Error('数据回读结果不一致');
+    let persistent='未知';if(navigator.storage?.persisted){persistent=(await navigator.storage.persisted())?'已获持久存储':'普通存储（系统仍可能清理）'}
+    el.textContent='写入/读取通过 · '+persistent;
+    return true;
+  }catch(e){el.textContent='检测失败：'+(e.message||e);return false}
+}
+function ensureEngine(){if(typeof window.ePub!=='function')throw new Error('阅读引擎未加载。请检查网络连接，重新刷新网页再试。')}
+async function importFile(file){
+  if(!file)return;
+  if(!file.name.toLowerCase().endsWith('.epub')){toast('请选择 EPUB 格式文件');return}
+  if(file.size>80*1024*1024){toast('暂不支持超过 80MB 的文件');return}
+  try{
+    ensureEngine();toast('正在检查 EPUB…');const bytes=await file.arrayBuffer();let temp=ePub(bytes);
+    await temp.ready;
+    const meta=temp.packaging?.metadata||{};
+    const rec={id:makeId(),filename:file.name,title:safeText(meta.title)||file.name.replace(/\.epub$/i,''),author:safeText(meta.creator)||'未知作者',buffer:bytes,cfi:null,percent:0,savedAt:Date.now()};
+    temp.destroy();await storeBook(rec);
+    const verified=await getBook(rec.id);
+    if(!verified?.buffer || verified.buffer.byteLength!==bytes.byteLength)throw new Error('浏览器未能可靠保存 EPUB，请检查存储权限');
+    await renderLibrary();$('storageStatus').textContent='书籍写入并回读成功（仍建议备份）';toast('导入并验证保存成功');await openBook(rec.id)
+  }catch(e){console.error(e);toast('导入失败：'+(e?.message||'请检查文件是否损坏'))}finally{$('bookFile').value=''}
+}
+function applyTheme(){ $('reader').dataset.theme=theme;localStorage.setItem('reader-theme',theme);if(rendition){rendition.themes.register('readerOverride',{'body':{'color':theme==='dark'?'#e4e7eb':'#303138','background':theme==='dark'?'#151b25':theme==='white'?'#ffffff':'#f8f2e6','line-height':'1.85 !important','font-family':'-apple-system, PingFang SC, Noto Serif SC, serif !important'},'p':{'line-height':'1.85 !important'}});rendition.themes.select('readerOverride');rendition.themes.fontSize(fontSize+'px')}for(const r of [neighborPrev,neighborNext]){if(r){try{r.themes.register('readerOverride',{'body':{'color':theme==='dark'?'#e4e7eb':'#303138','background':theme==='dark'?'#151b25':theme==='white'?'#ffffff':'#f8f2e6','line-height':'1.85 !important','font-family':'-apple-system, PingFang SC, Noto Serif SC, serif !important'},'p':{'line-height':'1.85 !important'}});r.themes.select('readerOverride');r.themes.fontSize(fontSize+'px')}catch(e){console.warn(e)}}}}
+async function openBook(id){
+  try{
+    ensureEngine();currentRecord=await getBook(id);if(!currentRecord)throw Error('本地找不到这本书，请重新导入');currentId=id;currentCfi=currentRecord.cfi;locationsReady=false;
+    $('library').classList.add('hidden');$('reader').classList.remove('hidden');$('readingTitle').textContent=currentRecord.title;$('readProgress').textContent='正在加载…';$('loading').classList.remove('hidden');
+    destroyRenditions();if(book){try{book.destroy()}catch{}}
+    book=ePub(currentRecord.buffer.slice(0));await book.ready;
+    setupPageTrack();
+    rendition=book.renderTo('viewer',{width:'100%',height:'100%',flow:'paginated',spread:'none',allowScriptedContent:false});
+    // Note: each EPUB.js rendition owns an independent pagination state.
+    neighborPrev=book.renderTo('viewerPrev',{width:'100%',height:'100%',flow:'paginated',spread:'none',allowScriptedContent:false});
+    neighborNext=book.renderTo('viewerNext',{width:'100%',height:'100%',flow:'paginated',spread:'none',allowScriptedContent:false});
+    rendition.on('rendered',(_,view)=>bindGestureDocument(view));
+    neighborPrev.on('rendered',(_,view)=>bindGestureDocument(view));
+    neighborNext.on('rendered',(_,view)=>bindGestureDocument(view));
+
+    rendition.on('relocated',position=>{
+      const cfi=position?.start?.cfi;if(!cfi)return;currentCfi=cfi;
+      const p=locationsReady?book.locations.percentageFromCfi(cfi):null;
+      if(Number.isFinite(p)){$('readProgress').textContent=`已阅读 ${Math.round(p*100)}%`;currentRecord.percent=Math.max(0,Math.min(100,p*100))}
+      else {$('readProgress').textContent=position?.start?.displayed?`本章 ${position.start.displayed.page} / ${position.start.displayed.total} 页`:'阅读进度已保存'}
+      clearTimeout(savedTimer);savedTimer=setTimeout(savePosition,380);scheduleNeighbors()
+    });
+    rendition.on('selected',(_,contents)=>{try{contents.window.getSelection().removeAllRanges()}catch{}});
+    applyTheme();await rendition.display(currentRecord.cfi||undefined);$('loading').classList.add('hidden');scheduleNeighbors();
+    buildToc();
+    // Generating locations does not block initial reading. If it fails, CFI resume still works.
+    const activeBook=book;book.locations.generate(1300).then(()=>{if(book!==activeBook)return;locationsReady=true;if(currentCfi){const p=activeBook.locations.percentageFromCfi(currentCfi);if(Number.isFinite(p)){$('readProgress').textContent=`已阅读 ${Math.round(p*100)}%`;currentRecord.percent=Math.max(0,Math.min(100,p*100));savePosition()}}}).catch(err=>console.warn('Locations unavailable',err));
+  }catch(e){console.error(e);$('loading').classList.add('hidden');toast('打开失败：'+(e?.message||'未知错误'));await closeReader()}
+}
+async function savePosition(){if(!currentId||!currentCfi)return;try{const rec=await getBook(currentId);if(!rec)return;rec.cfi=currentCfi;rec.percent=currentRecord?.percent||0;rec.savedAt=Date.now();await storeBook(rec);currentRecord=rec}catch(e){console.warn('Cannot save progress',e);toast('无法保存进度，请检查 Safari 存储空间')}}
+async function closeReader(){hideDrawer();clearTimeout(savedTimer);await savePosition();destroyRenditions();if(book){try{book.destroy()}catch{}}rendition=null;book=null;currentId=null;currentCfi=null;currentRecord=null;$('reader').classList.add('hidden');$('library').classList.remove('hidden');await renderLibrary()}
+async function buildToc(){const root=$('toc');root.replaceChildren();try{const navigation=await book.loaded.navigation;const items=navigation.toc||[];function add(items,depth){for(const item of items){const btn=document.createElement('button');btn.className='tocItem';btn.style.paddingLeft=(10+Math.min(depth,4)*15)+'px';btn.textContent=item.label||'未命名章节';btn.onclick=async()=>{hideDrawer();try{await rendition.display(item.href)}catch(e){toast('无法跳转到这一章节')}};root.append(btn);if(item.subitems?.length)add(item.subitems,depth+1)}}add(items,0);if(!items.length)root.textContent='这本书未提供导航目录'}catch(e){root.textContent='无法读取目录'}}
+function showDrawer(){ $('shade').classList.remove('hidden');$('drawer').classList.remove('hidden') }
+function hideDrawer(){ $('shade').classList.add('hidden');$('drawer').classList.add('hidden') }
+function changeSize(delta){fontSize=Math.max(14,Math.min(30,fontSize+delta));localStorage.setItem('reader-font-size',String(fontSize));if(rendition){rendition.themes.fontSize(fontSize+'px');for(const r of [neighborPrev,neighborNext])r?.themes.fontSize(fontSize+'px');neighborsReady=false;scheduleNeighbors()}toast('字号 '+fontSize+'px')}
+async function exportProgress(){const all=await getAllBooks();const data={format:'deepspace-progress',version:1,date:new Date().toISOString(),books:all.map(({filename,title,author,cfi,percent})=>({filename,title,author,cfi,percent}))};const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='深空书房-阅读进度.json';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)}
+async function importProgress(file){try{const data=JSON.parse(await file.text());if(data.format!=='deepspace-progress'||!Array.isArray(data.books))throw Error('不是本阅读器的进度备份');const all=await getAllBooks();let restored=0;for(const old of data.books){const rec=all.find(r=>r.filename===old.filename&&r.title===old.title);if(rec&&typeof old.cfi==='string'){rec.cfi=old.cfi;rec.percent=Number(old.percent)||0;rec.savedAt=Date.now();await storeBook(rec);restored++}}await renderLibrary();toast(`已恢复 ${restored} 本书的进度（需先导入对应 EPUB）`)}catch(e){toast('读取进度备份失败：'+e.message)}}
+function showHelp(){const content='使用说明：\n\n1. 点击「选择 EPUB 文件」，从 iPhone 的「文件」中选书。\n2. 左右下角翻页，上方菜单调整字体、主题或选择章节。\n3. 进度自动保存在此设备的 Safari 网站数据中，下次打开此网页即可继续。\n4. Safari 清除网站数据、无痕浏览、卸载主屏幕网页可能造成进度丢失。\n5. 本页面不上传电子书，也不会云端同步。\n\n是否导出当前书架的阅读进度备份？';if(confirm(content))exportProgress()}
+
+// VERSION CHECK: compare a small local JSON manifest rather than treating a cache hit as "updated".
+async function checkForUpdates(){
+ const el=$('updateStatus');el.textContent='正在检查…';
+ try{
+  const resp=await fetch('./version.json?check='+Date.now(),{cache:'no-store'});
+  if(!resp.ok)throw Error('服务器未提供版本信息');
+  const data=await resp.json();
+  if(!/^\d+\.\d+\.\d+/.test(data.version||''))throw Error('版本信息格式错误');
+  const installed=readerVersion.replace(/-.*/,''), remote=data.version.replace(/-.*/,'');
+  const newer=(a,b)=>{let x=a.split('.').map(Number),y=b.split('.').map(Number);for(let i=0;i<3;i++){if(x[i]!==y[i])return x[i]>y[i]}return false};
+  if(newer(remote,installed)){
+   el.textContent=`发现新版本 ${data.version}。请先备份阅读进度，再刷新应用。`;
+   if(confirm(`检测到 ${data.version}，是否重新加载？先确认已经备份阅读进度。`)){
+    if('serviceWorker' in navigator){const r=await navigator.serviceWorker.getRegistration();await r?.update()}
+    location.reload();
+   }
+  }else el.textContent=`当前版本：${readerVersion}。服务器版本：${data.version}。`;
+ }catch(e){el.textContent='检查失败：'+(e?.message||e)+'，请检查网络'}
+}
+function track(){return $('pageTrack')}
+function trackWidth(){return $('gestureSurface').clientWidth-18}
+function setTrackOffset(dx,animate=false){
+ const t=track();t.classList.toggle('settling',animate);t.classList.toggle('dragging',!animate);
+ t.style.transform=`translate3d(calc(-33.333333% + ${dx}px),0,0)`;
+}
+function setupPageTrack(){neighborsReady=false;neighborGeneration++;gesture=null;gestureBusy=false;setTrackOffset(0,false)}
+function destroyRenditions(){neighborGeneration++;gesture=null;neighborsReady=false;gestureBusy=false;for(const r of [rendition,neighborPrev,neighborNext]){try{r?.destroy()}catch(e){console.warn(e)}}rendition=null;neighborPrev=null;neighborNext=null;setTrackOffset(0,false)}
+let neighborTimer=null;
+function scheduleNeighbors(){
+ if(!rendition||!neighborPrev||!neighborNext||gestureBusy)return;
+ neighborsReady=false;clearTimeout(neighborTimer);neighborTimer=setTimeout(refreshNeighbors,140);
+}
+async function refreshNeighbors(){
+ if(!rendition||!neighborPrev||!neighborNext||gestureBusy)return;
+ const cfi=rendition.currentLocation()?.start?.cfi;
+ if(!cfi)return;
+ const gen=++neighborGeneration;
+ try{
+  // A separate rendition is moved by one REAL laid-out page; it is not a chapter preview.
+  await Promise.all([neighborPrev.display(cfi),neighborNext.display(cfi)]);
+  if(gen!==neighborGeneration||!neighborPrev||!neighborNext)return;
+  await Promise.all([neighborPrev.prev(),neighborNext.next()]);
+  if(gen!==neighborGeneration||gestureBusy)return;
+  neighborsReady=true;
+ }catch(e){console.warn('邻页预加载失败',e);neighborsReady=false}
+}
+function bindGestureDocument(view){
+ const doc=view?.contents?.document;
+ if(!doc||doc.__deepSpaceSwipe)return;
+ doc.__deepSpaceSwipe=true;
+ bindGestureTarget(doc);
+}
+function bindGestureTarget(node){
+ node.addEventListener('touchstart',onTouchStart,{passive:true});
+ node.addEventListener('touchmove',onTouchMove,{passive:false});
+ node.addEventListener('touchend',onTouchEnd,{passive:true});
+ node.addEventListener('touchcancel',onTouchCancel,{passive:true});
+}
+function onTouchStart(e){
+ if(!rendition||gestureBusy||!$('drawer').classList.contains('hidden')||e.touches.length!==1)return;
+ const p=e.touches[0];gesture={x:p.clientX,y:p.clientY,dx:0,started:performance.now(),horizontal:false,blocked:false};
+}
+function onTouchMove(e){
+ if(!gesture||gesture.blocked||gestureBusy||e.touches.length!==1)return;
+ const p=e.touches[0];let dx=p.clientX-gesture.x,dy=p.clientY-gesture.y;
+ if(!gesture.horizontal){
+  if(Math.abs(dy)>10&&Math.abs(dy)>Math.abs(dx)*1.25){gesture.blocked=true;return}
+  if(Math.abs(dx)<8)return;
+  if(Math.abs(dx)>Math.abs(dy)*1.15)gesture.horizontal=true;else return;
+ }
+ if(!neighborsReady){gesture.blocked=true;return}
+ e.preventDefault();gesture.dx=Math.max(-trackWidth(),Math.min(trackWidth(),dx));
+ setTrackOffset(gesture.dx,false);
+}
+async function onTouchEnd(){
+ if(!gesture)return;const g=gesture;gesture=null;
+ if(!g.horizontal||g.blocked||gestureBusy){setTrackOffset(0,true);return}
+ const velocity=Math.abs(g.dx)/Math.max(1,performance.now()-g.started);
+ const shouldMove=Math.abs(g.dx)>trackWidth()*.32||(Math.abs(g.dx)>35&&velocity>.55);
+ const direction=shouldMove?(g.dx<0?'next':'prev'):null;
+ gestureBusy=true;
+ setTrackOffset(direction?(direction==='next'?-trackWidth():trackWidth()):0,true);
+ await new Promise(resolve=>setTimeout(resolve,215));
+ if(direction&&rendition){try{await rendition[direction]()}catch(e){toast('翻页失败，请使用底部按钮')}}
+ setTrackOffset(0,false);gestureBusy=false;scheduleNeighbors();
+}
+function onTouchCancel(){gesture=null;setTrackOffset(0,true)}
+// Outer layer also receives touches outside the iframe.
+bindGestureTarget($('gestureSurface'));
+$('checkUpdates').onclick=checkForUpdates;
+
+$('checkStorage').onclick=checkStorage;
+$('bookFile').addEventListener('change',e=>importFile(e.target.files?.[0]));$('helpButton').onclick=showHelp;
+$('backButton').onclick=closeReader;$('menuButton').onclick=showDrawer;$('closeDrawer').onclick=hideDrawer;$('shade').onclick=hideDrawer;
+$('prevButton').onclick=()=>rendition?.prev();$('nextButton').onclick=()=>rendition?.next();
+$('fontSmaller').onclick=()=>changeSize(-2);$('fontLarger').onclick=()=>changeSize(2);
+document.querySelectorAll('[data-theme-choice]').forEach(b=>b.onclick=()=>{theme=b.dataset.themeChoice;applyTheme()});
+document.addEventListener('keydown',e=>{if($('reader').classList.contains('hidden'))return;if(e.key==='ArrowRight')rendition?.next();if(e.key==='ArrowLeft')rendition?.prev();if(e.key==='Escape')hideDrawer()});
+document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden')savePosition()});window.addEventListener('pagehide',()=>savePosition());
+(async()=>{try{await initDb();await renderLibrary();await checkStorage();if(location.protocol==='https:'&&'serviceWorker' in navigator)navigator.serviceWorker.register('./sw.js').catch(()=>{});}catch(e){console.error(e);$('storageStatus').textContent='初始化失败：'+(e.message||e);toast('无法使用浏览器本地存储。请使用普通 Safari 模式，或检查隐私设置。')}})();
+</script>
+</body>
+</html>
