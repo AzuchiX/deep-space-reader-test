@@ -45,7 +45,7 @@
     <aside id="drawer" class="drawer hidden" aria-label="阅读设置与目录"><div class="drawerHead"><b>阅读控制</b><button id="closeDrawer" class="iconBtn">✕</button></div><div class="drawerBody">
       <h2>排版</h2><div class="settingsRow"><span>字号</span><div class="pillGroup"><button class="pill" id="fontSmaller">A−</button><button class="pill" id="fontLarger">A＋</button></div></div>
       <div class="settingsRow"><span>主题</span><div class="pillGroup"><button class="pill" data-theme-choice="sepia">护眼</button><button class="pill" data-theme-choice="white">白色</button><button class="pill" data-theme-choice="dark">深色</button></div></div>
-      <h2 style="margin-top:26px">阅读器更新</h2><div class="settingsRow"><span id="versionInfo">当前版本 V1.2 测试版</span><button class="pill" id="checkUpdates">检查更新</button></div><p id="updateStatus" class="small">测试版不会自动覆盖正式版。</p><h2 style="margin-top:26px">章节目录</h2><div id="toc">正在读取目录…</div>
+      <h2 style="margin-top:26px">阅读器更新</h2><div class="settingsRow"><span id="versionInfo">当前版本 V1.2.1 修复测试版</span><button class="pill" id="checkUpdates">检查更新</button></div><p id="updateStatus" class="small">测试版不会自动覆盖正式版。</p><h2 style="margin-top:26px">章节目录</h2><div id="toc">正在读取目录…</div>
     </div></aside>
   </section>
 </main>
@@ -61,7 +61,7 @@ let savedTimer=null, toastTimer=null, locationsReady=false;
 // Isolated preview renditions show the previous and next pages during a held swipe.
 let neighborPrev=null, neighborNext=null, gestureBusy=false, neighborsReady=false;
 let neighborGeneration=0, gesture=null, lastMoveAt=0;
-const readerVersion='1.2.0-beta';
+const readerVersion='1.2.1-beta';
 
 function toast(message){$('toast').textContent=message;$('toast').classList.remove('hidden');clearTimeout(toastTimer);toastTimer=setTimeout(()=>$('toast').classList.add('hidden'),3400)}
 function makeId(){return crypto.randomUUID?crypto.randomUUID():String(Date.now())+'-'+Math.random().toString(36).slice(2)}
@@ -205,7 +205,7 @@ async function refreshNeighbors(){
  }catch(e){console.warn('邻页预加载失败',e);neighborsReady=false}
 }
 function bindGestureDocument(view){
- const doc=view?.contents?.document;
+ const doc=view?.contents?.document || view?.document || view?.iframe?.contentDocument;
  if(!doc||doc.__deepSpaceSwipe)return;
  doc.__deepSpaceSwipe=true;
  bindGestureTarget(doc);
@@ -228,9 +228,12 @@ function onTouchMove(e){
   if(Math.abs(dx)<8)return;
   if(Math.abs(dx)>Math.abs(dy)*1.15)gesture.horizontal=true;else return;
  }
- if(!neighborsReady){gesture.blocked=true;return}
- e.preventDefault();gesture.dx=Math.max(-trackWidth(),Math.min(trackWidth(),dx));
- setTrackOffset(gesture.dx,false);
+ // Do not discard the gesture when asynchronous preview rendering is late.
+ // Without previews, fall back to a reliable swipe-to-turn on release.
+ if(e.cancelable)e.preventDefault();
+ gesture.dx=Math.max(-trackWidth(),Math.min(trackWidth(),dx));
+ gesture.hasPreview=neighborsReady;
+ if(neighborsReady)setTrackOffset(gesture.dx,false);
 }
 async function onTouchEnd(){
  if(!gesture)return;const g=gesture;gesture=null;
@@ -239,7 +242,7 @@ async function onTouchEnd(){
  const shouldMove=Math.abs(g.dx)>trackWidth()*.32||(Math.abs(g.dx)>35&&velocity>.55);
  const direction=shouldMove?(g.dx<0?'next':'prev'):null;
  gestureBusy=true;
- setTrackOffset(direction?(direction==='next'?-trackWidth():trackWidth()):0,true);
+ setTrackOffset(g.hasPreview&&direction?(direction==='next'?-trackWidth():trackWidth()):0,true);
  await new Promise(resolve=>setTimeout(resolve,215));
  if(direction&&rendition){try{await rendition[direction]()}catch(e){toast('翻页失败，请使用底部按钮')}}
  setTrackOffset(0,false);gestureBusy=false;scheduleNeighbors();
